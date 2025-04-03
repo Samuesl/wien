@@ -21,6 +21,7 @@ L.tileLayer('https://mapsneu.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{
 let marker = L.marker([stephansdom.lat, stephansdom.lng]).addTo(map);
 marker.bindPopup(stephansdom.title).openPopup();
 */
+ 
 
 //Massstab
 L.control.scale({
@@ -38,7 +39,6 @@ async function loadSights(url) {
     }).addTo(map);
 
 }
-loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SEHENSWUERDIGOGD&srsName=EPSG:4326&outputFormat=json");
 
 //Sehenswürdigkeiten Linien
 async function loadLines(url) {
@@ -51,8 +51,6 @@ async function loadLines(url) {
     }).addTo(map);
 
 }
-loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
-
 
 //Sehenswürdigkeiten Linien Stops
 async function loadStops(url) {
@@ -65,9 +63,8 @@ async function loadStops(url) {
     }).addTo(map);
 
 }
-loadStops("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKHTSVSLOGD&srsName=EPSG:4326&outputFormat=json");
 
-//Sehenswürdigkeiten Linien Zonen
+//Sehenswürdigkeiten Fußgängerzonen
 async function loadZones(url) {
     console.log(url);
     let response = await fetch(url);
@@ -78,4 +75,9 @@ async function loadZones(url) {
     }).addTo(map);
 
 }
+
+//GeoJson laden und visualisieren
+loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
+loadStops("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKHTSVSLOGD&srsName=EPSG:4326&outputFormat=json");
+loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SEHENSWUERDIGOGD&srsName=EPSG:4326&outputFormat=json");
 loadZones("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:FUSSGEHERZONEOGD&srsName=EPSG:4326&outputFormat=json");
