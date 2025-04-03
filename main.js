@@ -17,6 +17,14 @@ let marker = L.marker([stephansdom.lat, stephansdom.lng]).addTo(map);
 marker.bindPopup(stephansdom.title).openPopup();
 */
  
+//Overlays definieren
+let overlays = {
+    sights: L.featureGroup().addTo(map),
+    lines: L.featureGroup().addTo(map),
+    stops: L.featureGroup().addTo(map),
+    zones: L.featureGroup().addTo(map),
+}
+
 //Layercontrol
 L.control.layers({
  "basmap.at grau" :L.tileLayer('https://mapsneu.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{y}/{x}.png', {
