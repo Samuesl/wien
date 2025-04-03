@@ -17,9 +17,10 @@ L.tileLayer('https://mapsneu.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{
     attribution: 'Hintergrundkarte: <a href="https://www.basemap.at">basemap.at</a>'
 }).addTo(map);
 
-// Marker mit Popup beim Stephansdom
+/* Marker mit Popup beim Stephansdom
 let marker = L.marker([stephansdom.lat, stephansdom.lng]).addTo(map);
 marker.bindPopup(stephansdom.title).openPopup();
+*/
 
 //Massstab
 L.control.scale({
@@ -31,7 +32,50 @@ async function loadSights(url) {
     //console.log(url);
     let response = await fetch(url);
     let jsondata = await response.json();
-   // console.log(jsondata);
-    L.geoJSON(jsondata).addTo(map);
+    // console.log(jsondata);
+    L.geoJSON(jsondata, {
+        attribution: "Datenquelle: <a href='https://data.wien.gv.at'> Stadt Wien</a>"
+    }).addTo(map);
+
 }
 loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SEHENSWUERDIGOGD&srsName=EPSG:4326&outputFormat=json");
+
+//Sehenswürdigkeiten Linien
+async function loadLines(url) {
+    console.log(url);
+    let response = await fetch(url);
+    let jsondata = await response.json();
+    console.log(jsondata);
+    L.geoJSON(jsondata, {
+        attribution: "Datenquelle: <a href='https://data.wien.gv.at'> Stadt Wien</a>"
+    }).addTo(map);
+
+}
+loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
+
+
+//Sehenswürdigkeiten Linien Stops
+async function loadStops(url) {
+    console.log(url);
+    let response = await fetch(url);
+    let jsondata = await response.json();
+    console.log(jsondata);
+    L.geoJSON(jsondata, {
+        attribution: "Datenquelle: <a href='https://data.wien.gv.at'> Stadt Wien</a>"
+    }).addTo(map);
+
+}
+loadStops("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKHTSVSLOGD&srsName=EPSG:4326&outputFormat=json");
+
+//Sehenswürdigkeiten Linien Zonen
+async function loadZones(url) {
+    console.log(url);
+    let response = await fetch(url);
+    let jsondata = await response.json();
+    console.log(jsondata);
+    L.geoJSON(jsondata, {
+        attribution: "Datenquelle: <a href='https://data.wien.gv.at'> Stadt Wien</a>"
+    }).addTo(map);
+
+}
+loadZones("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:FUSSGEHERZONEOGD&srsName=EPSG:4326&outputFormat=json");
