@@ -22,6 +22,14 @@ let marker = L.marker([stephansdom.lat, stephansdom.lng]).addTo(map);
 marker.bindPopup(stephansdom.title).openPopup();
 */
  
+//Layercontrol
+
+L.control.layers({
+ 
+},{
+
+}).addTo(map);
+
 
 //Massstab
 L.control.scale({
