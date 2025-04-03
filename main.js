@@ -16,7 +16,7 @@ let map = L.map("map").setView([stephansdom.lat, stephansdom.lng], stephansdom.z
 let marker = L.marker([stephansdom.lat, stephansdom.lng]).addTo(map);
 marker.bindPopup(stephansdom.title).openPopup();
 */
- 
+
 //Overlays definieren
 let overlays = {
     sights: L.featureGroup().addTo(map),
@@ -27,11 +27,15 @@ let overlays = {
 
 //Layercontrol
 L.control.layers({
- "basmap.at grau" :L.tileLayer('https://mapsneu.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{y}/{x}.png', {
-    maxZoom: 19,
-    attribution: 'Hintergrundkarte: <a href="https://www.basemap.at">basemap.at</a>'
-}).addTo(map)
-},{
+    "basemap.at ": L.tileLayer.provider('BasemapAT.basemap'),
+    "basemap.at grau": L.tileLayer.provider('BasemapAT.grau').addTo(map),
+    "basemap.at.overlay": L.tileLayer.provider('BasemapAT.overlay'),
+    "basemap.at terrain": L.tileLayer.provider('BasemapAT.terrain'),
+    "basemap.at surface": L.tileLayer.provider('BasemapAT.surface'),
+    "basemap.at highdpi": L.tileLayer.provider('BasemapAT.highdpi'),
+    "basemap.at ortho": L.tileLayer.provider('BasemapAT.orthofoto'),
+
+}, {
     "Sehenswürdigkeiten": overlays.sights,
     "Vienna Sightseeing Linien": overlays.lines,
     "Vienna Sightseeing Haltestellen": overlays.stops,
