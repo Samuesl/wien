@@ -41,7 +41,7 @@ L.control.layers({
     "Vienna Sightseeing Linien": overlays.lines,
     "Vienna Sightseeing Haltestellen": overlays.stops,
     "Fußgäbgerzonen": overlays.zones,
-    "hotels": overlays.hotels,
+    "Hotels": overlays.hotels,
 }).addTo(map);
 
 
