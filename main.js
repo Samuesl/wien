@@ -33,7 +33,7 @@ let overlays = {
     stops: L.featureGroup().addTo(map),
     zones: L.featureGroup().addTo(map),
     hotels: L.markerClusterGroup({
-        disableClusterAtZoom: 15
+        disableClusteringAtZoom: 15
     }).addTo(map),
 }
 
