@@ -57,7 +57,7 @@ L.control.scale({
     imperial: false,
 }).addTo(map);
 
-//Sehenswürdigkeiten Standorte Wien
+//Sehenswürdigkeiten
 async function loadSights(url) {
     //console.log(url);
     let response = await fetch(url);
@@ -73,12 +73,21 @@ async function loadSights(url) {
                     popupAnchor: [0, -37]
                 })
             });
+        },
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup("Hallo");
+            //console.log(feature.properties);
+            layer.bindPopup(`
+                <img src="${feature.properties.THUMBNAIL}" alt="*">
+                <h4>${feature.properties.NAME}</h4>
+                <adress>${feature.properties.ADRESSE}</adress>
+                <a href="${feature.properties.WEITERE_INF}" target="wien">Website</a>
+             `);
         }
     }).addTo(overlays.sights);
-
 }
 
-//Sehenswürdigkeiten Linien
+//Linien
 async function loadLines(url) {
     console.log(url);
     let response = await fetch(url);
@@ -114,7 +123,7 @@ async function loadLines(url) {
 
 }
 
-//Sehenswürdigkeiten Linien Stops
+//Linien Stops
 async function loadStops(url) {
     console.log(url);
     let response = await fetch(url);
@@ -127,17 +136,17 @@ async function loadStops(url) {
             return L.marker(latlng, {
                 icon: L.icon({
                     iconUrl: `icons/bus_${feature.properties.LINE_ID}.png`,
-                iconAnchor: [16, 37],
-                popupAnchor: [0, -37]
-        })
-    });
-}
-    
+                    iconAnchor: [16, 37],
+                    popupAnchor: [0, -37]
+                })
+            });
+        }
+
     }).addTo(overlays.stops);
 
 }
 
-//Sehenswürdigkeiten Fußgängerzonen
+//Fußgängerzonen
 async function loadZones(url) {
     console.log(url);
     let response = await fetch(url);
@@ -186,7 +195,7 @@ async function loadHotels(url) {
 
             return L.marker(latlng, {
                 icon: L.icon({
-                    iconUrl: `icons / ${ iconName }`,
+                    iconUrl: `icons / ${iconName}`,
                     iconAnchor: [16, 37],
                     popupAnchor: [0, -37]
                 })
@@ -197,8 +206,8 @@ async function loadHotels(url) {
 }
 
 //GeoJson laden und visualisieren
-loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
-loadStops("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKHTSVSLOGD&srsName=EPSG:4326&outputFormat=json");
+//loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
+//loadStops("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKHTSVSLOGD&srsName=EPSG:4326&outputFormat=json");
 loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SEHENSWUERDIGOGD&srsName=EPSG:4326&outputFormat=json");
-loadZones("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:FUSSGEHERZONEOGD&srsName=EPSG:4326&outputFormat=json");
-oadHotels("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:UNTERKUNFTOGD&srsName=EPSG:4326&outputFormat=json");
+//loadZones("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:FUSSGEHERZONEOGD&srsName=EPSG:4326&outputFormat=json");
+//loadHotels("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:UNTERKUNFTOGD&srsName=EPSG:4326&outputFormat=json");
