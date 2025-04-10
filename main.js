@@ -16,7 +16,9 @@ let stephansdom = {
 };
 
 // Karte initialisieren
-let map = L.map("map").setView([stephansdom.lat, stephansdom.lng], stephansdom.zoom);
+let map = L.map("map",{
+    maxZoom: 19
+}).setView([stephansdom.lat, stephansdom.lng], stephansdom.zoom);
 
 
 /* Marker mit Popup beim Stephansdom
@@ -30,7 +32,9 @@ let overlays = {
     lines: L.featureGroup().addTo(map),
     stops: L.featureGroup().addTo(map),
     zones: L.featureGroup().addTo(map),
-    hotels: L.featureGroup().addTo(map),
+    hotels: L.markerClusterGroup({
+        disableClusterAtZoom: 17
+    }).addTo(map),
 }
 
 //Layercontrol
@@ -195,7 +199,7 @@ async function loadHotels(url) {
 
             return L.marker(latlng, {
                 icon: L.icon({
-                    iconUrl: `icons / ${iconName}`,
+                    iconUrl: `icons/${iconName}`,
                     iconAnchor: [16, 37],
                     popupAnchor: [0, -37]
                 })
@@ -208,6 +212,6 @@ async function loadHotels(url) {
 //GeoJson laden und visualisieren
 //loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
 //loadStops("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKHTSVSLOGD&srsName=EPSG:4326&outputFormat=json");
-loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SEHENSWUERDIGOGD&srsName=EPSG:4326&outputFormat=json");
+//loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SEHENSWUERDIGOGD&srsName=EPSG:4326&outputFormat=json");
 //loadZones("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:FUSSGEHERZONEOGD&srsName=EPSG:4326&outputFormat=json");
-//loadHotels("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:UNTERKUNFTOGD&srsName=EPSG:4326&outputFormat=json");
+loadHotels("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:UNTERKUNFTOGD&srsName=EPSG:4326&outputFormat=json");
