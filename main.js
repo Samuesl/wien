@@ -16,7 +16,7 @@ let stephansdom = {
 };
 
 // Karte initialisieren
-let map = L.map("map",{
+let map = L.map("map", {
     maxZoom: 19
 }).setView([stephansdom.lat, stephansdom.lng], stephansdom.zoom);
 
@@ -100,7 +100,7 @@ async function loadLines(url) {
     L.geoJSON(jsondata, {
         attribution: "Datenquelle: <a href='https://data.wien.gv.at'> Stadt Wien</a>",
         style: function (feature) {
-            //console.log(feature.properties);
+            console.log(feature.properties);
             let lineColor;
 
             if (feature.properties.LINE_NAME == "Yellow Line") {
@@ -122,6 +122,17 @@ async function loadLines(url) {
             return {
                 color: lineColor
             }
+
+        },
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup("Hallo");
+            console.log(feature.properties);
+            layer.bindPopup(`
+                    <h4><i class="fa-solid fa-bus"> </i>${feature.properties.LINE_NAME}</h4>
+                <div><i class="fa-regular fa-circle-stop"></i> ${feature.properties.FROM_NAME} </div>
+                <div><i class="fa-solid fa-down-long"></i></div>
+                <div><i class="fa-regular fa-circle-stop"></i> ${feature.properties.TO_NAME}</div>
+                 `);
         }
     }).addTo(overlays.lines);
 
@@ -174,6 +185,15 @@ async function loadZones(url) {
                 opacity: 0.4,
                 fillOpacity: 0.1,
             }
+        },
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup("Hallo");
+            console.log(feature.properties);
+            layer.bindPopup(`
+                    <h4>Fußgängerzone </i>${feature.properties.ADRESSE}</h4>
+                <div><i class="fa-regular fa-clock"></i> ${feature.properties.ZEITRAUM} </div>
+                <div><i class="fa-solid fa-circle-info"></i> ${feature.properties.AUSN_TEXT}</div>
+                 `);
         }
     }).addTo(overlays.zones);
 }
