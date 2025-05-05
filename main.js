@@ -241,8 +241,8 @@ async function loadHotels(url) {
                     <h5></i> HOTEL ${feature.properties. KATEGORIE_TXT}</h5>
                     <hr>
                 <div>Addr.: ${feature.properties.ADRESSE} </div>
-                <div> Tel.: <a href="${feature.properties.KONTAKT_TEL}" target="wien"> ${feature.properties.KONTAKT_TEL}</a></div>
-                <div><a href="${feature.properties.KONTAKT_EMAIL}" target="wien"> ${feature.properties.KONTAKT_EMAIL}</a></div>
+                <div> Tel.: <a href="tel:${feature.properties.KONTAKT_TEL}" target="wien"> ${feature.properties.KONTAKT_TEL}</a></div>
+                <div><a href="mailto:${feature.properties.KONTAKT_EMAIL}" target="wien"> ${feature.properties.KONTAKT_EMAIL}</a></div>
                 <div><a href="${feature.properties.WEBLINK1}" target="wien">Homepage</a></div>
                  `);
         }
