@@ -136,7 +136,7 @@ async function loadStops(url) {
     L.geoJSON(jsondata, {
         attribution: "Datenquelle: <a href='https://data.wien.gv.at'> Stadt Wien</a>",
         pointToLayer: function (feature, latlng) {
-            //console.log(feature.properties);
+            console.log(feature.properties);
             return L.marker(latlng, {
                 icon: L.icon({
                     iconUrl: `icons/bus_${feature.properties.LINE_ID}.png`,
@@ -144,8 +144,16 @@ async function loadStops(url) {
                     popupAnchor: [0, -37]
                 })
             });
+        },
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup("Hallo");
+            console.log(feature.properties);
+            layer.bindPopup(`
+                <h4>${feature.properties.LINE_NAME}</h4>
+            <adress>${feature.properties.LINE_ID} ${feature.properties.STAT_NAME}</adress>
+            
+             `);
         }
-
     }).addTo(overlays.stops);
 
 }
