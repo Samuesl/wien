@@ -129,9 +129,9 @@ async function loadLines(url) {
             console.log(feature.properties);
             layer.bindPopup(`
                     <h4><i class="fa-solid fa-bus"> </i>${feature.properties.LINE_NAME}</h4>
-                <div><i class="fa-regular fa-circle-stop"></i> ${feature.properties.FROM_NAME} </div>
-                <div><i class="fa-solid fa-down-long"></i></div>
-                <div><i class="fa-regular fa-circle-stop"></i> ${feature.properties.TO_NAME}</div>
+                <p><i class="fa-regular fa-circle-stop"></i> ${feature.properties.FROM_NAME} </p>
+                <p><i class="fa-solid fa-down-long"></i></p>
+                <p><i class="fa-regular fa-circle-stop"></i> ${feature.properties.TO_NAME}</p>
                  `);
         }
     }).addTo(overlays.lines);
@@ -191,8 +191,8 @@ async function loadZones(url) {
             console.log(feature.properties);
             layer.bindPopup(`
                     <h4>Fußgängerzone </i>${feature.properties.ADRESSE}</h4>
-                <div><i class="fa-regular fa-clock"></i> ${feature.properties.ZEITRAUM} </div>
-                <div><i class="fa-solid fa-circle-info"></i> ${feature.properties.AUSN_TEXT}</div>
+                <p><i class="fa-regular fa-clock"></i> ${feature.properties.ZEITRAUM} </p>
+                <p><i class="fa-solid fa-circle-info"></i> ${feature.properties.AUSN_TEXT}</p>
                  `);
         }
     }).addTo(overlays.zones);
@@ -240,10 +240,10 @@ async function loadHotels(url) {
                     <h4></i>${feature.properties.BETRIEB}</h4>
                     <h5></i> HOTEL ${feature.properties. KATEGORIE_TXT}</h5>
                     <hr>
-                <div>Addr.: ${feature.properties.ADRESSE} </div>
-                <div> Tel.: <a href="tel:${feature.properties.KONTAKT_TEL}" target="wien"> ${feature.properties.KONTAKT_TEL}</a></div>
-                <div><a href="mailto:${feature.properties.KONTAKT_EMAIL}" target="wien"> ${feature.properties.KONTAKT_EMAIL}</a></div>
-                <div><a href="${feature.properties.WEBLINK1}" target="wien">Homepage</a></div>
+                <p>Addr.: ${feature.properties.ADRESSE} </p>
+                <p> Tel.: <a href="tel:${feature.properties.KONTAKT_TEL}" target="wien"> ${feature.properties.KONTAKT_TEL}</a></p>
+                <p><a href="mailto:${feature.properties.KONTAKT_EMAIL}" target="wien"> ${feature.properties.KONTAKT_EMAIL}</a></p>
+                <p><a href="${feature.properties.WEBLINK1}" target="wien">Homepage</a></p>
                  `);
         }
     }).addTo(overlays.hotels);
